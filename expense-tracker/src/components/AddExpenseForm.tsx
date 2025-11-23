@@ -32,7 +32,6 @@ export const AddExpenseForm: React.FC<Props> = ({ initial = null, onCancel, onSa
     const payload = { title: title.trim(), amount: numeric, category, date };
     if (initial) onSave({ ...(initial as Expense), ...payload });
     else onSave(payload);
-    // reset if creating
     if (!initial) {
       setTitle('');
       setAmount('');
@@ -42,28 +41,125 @@ export const AddExpenseForm: React.FC<Props> = ({ initial = null, onCancel, onSa
   };
 
   return (
-    <form onSubmit={submit} className="space-y-3">
+    <form onSubmit={submit} className="space-y-4">
+      {/* Title */}
       <div>
-        <label className="block text-sm">Title</label>
-        <input value={title} onChange={(e) => setTitle(e.target.value)} className="w-full border rounded p-2 bg-white dark:bg-slate-700" />
+        <label className="block text-sm font-medium mb-1 text-slate-700 dark:text-slate-200">Title</label>
+        <input
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder="Enter expense title"
+          className="
+            w-full
+            rounded-lg
+            px-4 py-2
+            border border-gray-300 dark:border-slate-600
+            bg-white dark:bg-slate-700
+            text-slate-900 dark:text-slate-100
+            shadow-sm hover:shadow-md
+            focus:outline-none focus:ring-2 focus:ring-indigo-400 dark:focus:ring-indigo-500
+            transition-all duration-300
+          "
+        />
       </div>
+
+      {/* Amount */}
       <div>
-        <label className="block text-sm">Amount</label>
-        <input value={amount} onChange={(e) => setAmount(e.target.value)} type="number" className="w-full border rounded p-2 bg-white dark:bg-slate-700" />
+        <label className="block text-sm font-medium mb-1 text-slate-700 dark:text-slate-200">Amount</label>
+        <input
+          value={amount}
+          onChange={(e) => setAmount(e.target.value)}
+          type="number"
+          placeholder="₦0"
+          className="
+            w-full
+            rounded-lg
+            px-4 py-2
+            border border-gray-300 dark:border-slate-600
+            bg-white dark:bg-slate-700
+            text-slate-900 dark:text-slate-100
+            shadow-sm hover:shadow-md
+            focus:outline-none focus:ring-2 focus:ring-indigo-400 dark:focus:ring-indigo-500
+            transition-all duration-300
+          "
+        />
       </div>
+
+      {/* Category */}
       <div>
-        <label className="block text-sm">Category</label>
-        <select value={category} onChange={(e) => setCategory(e.target.value as Category)} className="w-full border rounded p-2 bg-white dark:bg-slate-700">
+        <label className="block text-sm font-medium mb-1 text-slate-700 dark:text-slate-200">Category</label>
+        <select
+          value={category}
+          onChange={(e) => setCategory(e.target.value as Category)}
+          className="
+            w-full
+            rounded-lg
+            px-4 py-2
+            border border-gray-300 dark:border-slate-600
+            bg-white dark:bg-slate-700
+            text-slate-900 dark:text-slate-100
+            shadow-sm hover:shadow-md
+            focus:outline-none focus:ring-2 focus:ring-indigo-400 dark:focus:ring-indigo-500
+            transition-all duration-300
+            cursor-pointer
+          "
+        >
           {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
         </select>
       </div>
+
+      {/* Date */}
       <div>
-        <label className="block text-sm">Date</label>
-        <input value={date} onChange={(e) => setDate(e.target.value)} type="date" className="w-full border rounded p-2 bg-white dark:bg-slate-700" />
+        <label className="block text-sm font-medium mb-1 text-slate-700 dark:text-slate-200">Date</label>
+        <input
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
+          type="date"
+          className="
+            w-full
+            rounded-lg
+            px-4 py-2
+            border border-gray-300 dark:border-slate-600
+            bg-white dark:bg-slate-700
+            text-slate-900 dark:text-slate-100
+            shadow-sm hover:shadow-md
+            focus:outline-none focus:ring-2 focus:ring-indigo-400 dark:focus:ring-indigo-500
+            transition-all duration-300
+          "
+        />
       </div>
-      <div className="flex gap-2 justify-end">
-        {onCancel && <button type="button" onClick={onCancel} className="px-3 py-1 rounded border">Cancel</button>}
-        <button type="submit" className="px-3 py-1 rounded bg-sky-600 text-white">Save</button>
+
+      {/* Buttons */}
+      <div className="flex gap-3 justify-end mt-2">
+        {onCancel && (
+          <button
+            type="button"
+            onClick={onCancel}
+            className="
+              px-4 py-2
+              rounded-lg
+              border border-gray-300 dark:border-slate-600
+              text-slate-700 dark:text-slate-200
+              hover:bg-gray-100 dark:hover:bg-slate-600
+              transition-colors duration-300
+            "
+          >
+            Cancel
+          </button>
+        )}
+        <button
+          type="submit"
+          className="
+            px-4 py-2
+            rounded-lg
+            bg-indigo-600 hover:bg-indigo-700
+            text-white
+            shadow-sm hover:shadow-md
+            transition-all duration-300
+          "
+        >
+          Save
+        </button>
       </div>
     </form>
   );
