@@ -1,5 +1,5 @@
 import React from 'react';
-import { Expense } from '../types/expense';
+import { type Expense } from '../types/expense';
 import dayjs from 'dayjs';
 
 type Props = {

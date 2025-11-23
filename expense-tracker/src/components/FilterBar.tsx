@@ -1,5 +1,5 @@
 import React from 'react';
-import { Category } from '../types/expense';
+import { type Category } from '../types/expense';
 import dayjs from 'dayjs';
 
 type Props = {

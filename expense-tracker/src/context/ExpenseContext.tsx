@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
-import { Expense } from '../types/expense';
+import { type Expense } from '../types/expense';
 import { loadExpenses, saveExpenses } from '../utils/storage';
 import { sampleExpenses } from '../data/sampleExpenses';
 import dayjs from 'dayjs';

@@ -1,4 +1,4 @@
-import { Expense } from '../types/expense';
+import { type Expense } from '../types/expense';
 
 const KEY = 'spendsmart_expenses_v1';
 

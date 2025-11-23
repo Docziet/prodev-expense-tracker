@@ -4,7 +4,7 @@ import { AddExpenseForm } from '../components/AddExpenseForm';
 import { ExpenseList } from '../components/ExpenseList';
 import { FilterBar } from '../components/FilterBar';
 import { Modal } from '../components/Modal';
-import { Expense } from '../types/expense';
+import { type Expense } from '../types/expense';
 import dayjs from 'dayjs';
 
 export const Home: React.FC = () => {
