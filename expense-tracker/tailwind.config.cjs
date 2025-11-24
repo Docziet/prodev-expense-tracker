@@ -1,13 +1,13 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
   darkMode: 'class', // use class strategy for dark mode
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       colors: {
-        primary: '#0ea5e9', // bright blue accent
-        secondary: '#facc15', // bright yellow accent
-        danger: '#ef4444', // red for errors / delete buttons
+        primary: '#0ea5e9',
+        secondary: '#facc15',
+        danger: '#ef4444',
         neutral: {
           50: '#f9fafb',
           100: '#f3f4f6',
@@ -36,29 +36,22 @@ export default {
         xl: '0 20px 25px rgba(0, 0, 0, 0.2)',
         '2xl': '0 25px 50px rgba(0, 0, 0, 0.25)',
       },
-      transitionProperty: {
-        'height': 'height',
-        'spacing': 'margin, padding',
-      },
-      transitionDuration: {
-        250: '250ms',
-        400: '400ms',
-        600: '600ms',
-      },
       keyframes: {
-        'fade-in': {
-          '0%': { opacity: 0 },
-          '100%': { opacity: 1 },
-        },
-        'slide-up': {
-          '0%': { transform: 'translateY(20px)', opacity: 0 },
-          '100%': { transform: 'translateY(0)', opacity: 1 },
-        },
+        'fade-in': { '0%': { opacity: 0 }, '100%': { opacity: 1 } },
+        'slide-up': { '0%': { transform: 'translateY(20px)', opacity: 0 }, '100%': { transform: 'translateY(0)', opacity: 1 } },
+        'scale-fade-in': { '0%': { opacity: 0, transform: 'scale(0.95)' }, '100%': { opacity: 1, transform: 'scale(1)' } },
       },
       animation: {
         'fade-in': 'fade-in 0.4s ease-out forwards',
         'slide-up': 'slide-up 0.4s ease-out forwards',
+        'scale-fade-in': 'scale-fade-in 0.3s ease-out forwards',
       },
+      transitionProperty: {
+        height: 'height',
+        spacing: 'margin, padding',
+        colors: 'background-color, color, border-color, fill, stroke',
+      },
+      transitionDuration: { 250: '250ms', 400: '400ms', 600: '600ms' },
     },
   },
   plugins: [],

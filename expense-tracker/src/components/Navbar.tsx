@@ -2,22 +2,28 @@ import React, { useState } from 'react';
 import { BsSun, BsMoon } from 'react-icons/bs';
 import clsx from 'clsx';
 
-type Props = { dark: boolean; toggleDark: () => void; };
+type Props = {
+  dark: boolean;
+  toggleDark: () => void;
+};
 
 export const Navbar: React.FC<Props> = ({ dark, toggleDark }) => {
-  // Track rotation degrees for smooth animation
   const [rotation, setRotation] = useState(0);
 
+  // Animate icon rotation
   const handleToggle = () => {
-    setRotation(prev => prev + 360); // rotate 360° on each click
-    toggleDark(); // toggle dark mode
+    setRotation(prev => prev + 360);
+    toggleDark(); // trigger dark mode toggle
   };
 
   return (
-    <header className={clsx(
-      'w-full py-4 shadow-md transition-colors duration-500 backdrop-blur-sm border-b border-slate-200 dark:border-slate-700',
-      'bg-white/80 dark:bg-slate-800/80'
-    )}>
+    <header
+      className={clsx(
+        'w-full py-4 shadow-md transition-colors duration-500 backdrop-blur-sm border-b',
+        'border-slate-200 dark:border-slate-700',
+        'bg-white/80 dark:bg-slate-800/80'
+      )}
+    >
       <div className="max-w-4xl mx-auto px-4 flex items-center justify-between">
         <h1 className="font-extrabold text-2xl text-slate-900 dark:text-slate-100 tracking-wide select-none">
           SpendSmart

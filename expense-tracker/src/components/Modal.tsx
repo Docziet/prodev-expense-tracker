@@ -1,20 +1,49 @@
-import React from 'react';
-import { IoClose } from 'react-icons/io5'; // Using an icon for a pro-level close button
+import React, { useEffect } from 'react';
+import { IoClose } from 'react-icons/io5';
 
-export const Modal: React.FC<{ open: boolean; onClose: () => void; children?: React.ReactNode }> = ({ open, onClose, children }) => {
+type ModalProps = {
+  open: boolean;
+  onClose: () => void;
+  children?: React.ReactNode;
+};
+
+export const Modal: React.FC<ModalProps> = ({ open, onClose, children }) => {
+  // Prevent body scroll when modal is open
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [open]);
+
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4 animate-fade-in">
-      <div className="
-        relative
-        bg-white dark:bg-slate-900
-        rounded-2xl shadow-2xl
-        w-full max-w-lg
-        p-6
-        animate-scale-in
-        transition-transform duration-300
-      ">
+    <div
+      className="
+        fixed inset-0 z-50 flex items-center justify-center
+        bg-black/40 backdrop-blur-sm
+        p-4
+        animate-fade-in
+      "
+      onClick={onClose} // close when clicking outside modal
+    >
+      <div
+        className="
+          relative
+          bg-white dark:bg-slate-900
+          rounded-3xl shadow-2xl
+          w-full max-w-lg
+          p-6 sm:p-8
+          transform scale-100 opacity-100
+          transition-all duration-300
+        "
+        onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside modal
+      >
         {/* Close button */}
         <button
           onClick={onClose}
@@ -24,15 +53,15 @@ export const Modal: React.FC<{ open: boolean; onClose: () => void; children?: Re
             text-slate-600 dark:text-slate-300
             hover:bg-slate-200 dark:hover:bg-slate-700
             transition-colors duration-200
+            focus:outline-none focus:ring-2 focus:ring-indigo-400 dark:focus:ring-indigo-500
           "
+          aria-label="Close modal"
         >
-          <IoClose size={20} />
+          <IoClose size={22} />
         </button>
 
         {/* Modal content */}
-        <div className="mt-2">
-          {children}
-        </div>
+        <div className="mt-4">{children}</div>
       </div>
     </div>
   );

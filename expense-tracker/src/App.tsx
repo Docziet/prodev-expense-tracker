@@ -4,13 +4,25 @@ import { Home } from './pages/Home';
 import { Navbar } from './components/Navbar';
 
 export const App: React.FC = () => {
-  const [dark, setDark] = useState(false);
+  // Initialize dark mode from localStorage directly
+  const [dark, setDark] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('theme') === 'dark';
+    }
+    return false;
+  });
 
+  // Apply dark/light theme by toggling class on <html>
   useEffect(() => {
     const root = document.documentElement;
     if (dark) root.classList.add('dark');
     else root.classList.remove('dark');
+
+    localStorage.setItem('theme', dark ? 'dark' : 'light');
   }, [dark]);
+
+  // Toggle dark mode
+  const toggleDark = () => setDark((prev) => !prev);
 
   return (
     <ExpenseProvider>
@@ -23,10 +35,7 @@ export const App: React.FC = () => {
         `}
       >
         {/* Navbar */}
-        <Navbar
-          dark={dark}
-          toggleDark={() => setDark((d) => !d)}
-        />
+        <Navbar dark={dark} toggleDark={toggleDark} />
 
         {/* Main Content */}
         <main className="flex-1 max-w-5xl w-full mx-auto px-4 py-8">
